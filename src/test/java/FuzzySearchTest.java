@@ -57,8 +57,8 @@ class FuzzySearchTest {
             String term = "eugene";
             Collection<String> source = getStringCollection();
 
+            // then
             Map<String, Float> matched = ngramSearch(n, term, source);
-
             matched.forEach((k, v) -> System.out.println("Token: " + k + "; Value: " + v));
         }
     }

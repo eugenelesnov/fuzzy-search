@@ -5,7 +5,7 @@ import lombok.NonNull;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static com.github.eugenelesnov.FuzzyUtil.ngramFrom;
+import static com.github.eugenelesnov.Util.*;
 
 /**
  * Fuzzy Search methods
@@ -48,38 +48,24 @@ public class FuzzySearch {
                     .filter((new ArrayList<>(termNgrams)::contains))
                     .collect(Collectors.toList());
 
-            float matchPercentage = Math.round(((float) result.size() / (float) termSize) * 100);
+            float matchPercentage = getMatchPercentage(termSize, result.size());
             matched.put(s, matchPercentage);
         });
         return orderByDescValue(matched);
     }
 
     /**
-     * Method to normalize input string
+     * Method to create ngrams from input string
      *
-     * @param input input string
-     * @return normalized string in lower case without
-     * leading and trailing spaces
+     * @param n   power of n-gram
+     * @param str input string
+     * @return list of ngrams
      */
-    private static String normalize(String input) {
-        return input.toLowerCase().trim();
-    }
-
-    /**
-     * Method to ordering map by descending value
-     *
-     * @param unorderedMap input map
-     * @return ordered map by descending value
-     */
-    private static Map<String, Float> orderByDescValue(Map<String, Float> unorderedMap) {
-        return unorderedMap.entrySet().stream()
-                .sorted(Collections.reverseOrder(Map.Entry.comparingByValue()))
-                .collect(Collectors.toMap(
-                        Map.Entry::getKey,
-                        Map.Entry::getValue,
-                        (x, y) -> {
-                            throw new IllegalStateException("Unexpected merge");
-                        }, LinkedHashMap::new));
+    private static List<String> ngramFrom(int n, String str) {
+        List<String> ngrams = new ArrayList<>();
+        for (int i = 0; i < str.length() - n + 1; i++)
+            ngrams.add(str.substring(i, i + n));
+        return ngrams;
     }
 
 }
