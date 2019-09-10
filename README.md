@@ -19,8 +19,8 @@ allprojects {
 2. Add dependency:
 ```
 dependencies {
-    implementation 'com.github.EugeneLesnov:fuzzy-search:VERSION.TAG'
+    implementation 'com.github.EugeneLesnov:fuzzy-search:0.3'
 }
 ```
 
-**NB! For now, there only 0.2 version available. Bugs are very possible.**
+**NB! For now, there only 0.3 version available. Bugs are very possible.**
