@@ -54,6 +54,7 @@ public class LevenshteinDistance {
                 cost[j] = cj;
             }
         }
+
         return cost[str2Length];
     }
 }
