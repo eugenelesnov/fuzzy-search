@@ -24,7 +24,7 @@ class Util {
     }
 
     /**
-     * Method to calculate match percentage
+     * Method to calculate match percentage for Ngram search
      *
      * @param termLength length of term String
      * @param resultSize size of result Collection

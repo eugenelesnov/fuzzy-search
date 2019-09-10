@@ -6,10 +6,10 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-import static com.github.eugenelesnov.FuzzySearch.ngramSearch;
+import static com.github.eugenelesnov.NgramSearch.ngramSearch;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class FuzzySearchTest {
+class NgramSearchTest {
 
     @Nested
     class NgramSearch {

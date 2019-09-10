@@ -8,11 +8,11 @@ import java.util.stream.Collectors;
 import static com.github.eugenelesnov.Util.*;
 
 /**
- * Fuzzy Search methods
+ * Ngram search implementation
  *
  * @author Eugene Lesnov
  */
-public class FuzzySearch {
+public class NgramSearch {
 
     /**
      * Method to search token in {@link Collection<String>}
