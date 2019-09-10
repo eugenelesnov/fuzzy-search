@@ -23,4 +23,4 @@ dependencies {
 }
 ```
 
-**NB! For now, there only 0.3 version available. Bugs are very possible.**
+**NB! For now, version 0.3 is latest one. Bugs are very possible.**
