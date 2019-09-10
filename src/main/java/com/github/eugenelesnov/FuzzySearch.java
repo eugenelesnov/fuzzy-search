@@ -33,7 +33,7 @@ public class FuzzySearch {
         }
 
         if (n <= 0) {
-            throw new IllegalStateException("The argument n must be >= 0");
+            throw new IllegalStateException("The argument n must be > 0");
         }
 
         List<String> termNgrams = new ArrayList<>(ngramFrom(n, normalize(token)));
@@ -61,7 +61,7 @@ public class FuzzySearch {
      * @param str input string
      * @return list of ngrams
      */
-    private static List<String> ngramFrom(int n, String str) {
+    public static List<String> ngramFrom(int n, String str) {
         List<String> ngrams = new ArrayList<>();
         for (int i = 0; i < str.length() - n + 1; i++)
             ngrams.add(str.substring(i, i + n));
