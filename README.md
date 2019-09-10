@@ -1,3 +1,5 @@
+[![](https://jitpack.io/v/EugeneLesnov/fuzzy-search.svg)](https://jitpack.io/#EugeneLesnov/fuzzy-search)
+
 # FuzzySearch
 Java implementation of some fuzzy search algorithms.
 
