@@ -17,12 +17,14 @@ public class NgramSearch {
     /**
      * Method to search token in {@link Collection<String>}
      *
-     * @param n      power of n-gram
+     * @param power  power of n-grams
      * @param token  search token
      * @param source collection for searching
      * @return map with a token as a key and precision (percentage) as a value
      */
-    public static Map<String, Float> ngramSearch(int n, @NonNull String token, @NonNull Collection<String> source) {
+    public static Map<String, Float> ngramSearch(int power,
+                                                 @NonNull String token,
+                                                 @NonNull Collection<String> source) {
 
         if (token.isEmpty()) {
             throw new IllegalStateException("Search token must not be empty");
@@ -32,20 +34,20 @@ public class NgramSearch {
             throw new IllegalStateException("Source collection must not be empty");
         }
 
-        if (n <= 0) {
-            throw new IllegalStateException("The argument n must be > 0");
+        if (power <= 0) {
+            throw new IllegalStateException("The power of n-grams must be > 0");
         }
 
-        List<String> termNgrams = new ArrayList<>(ngramFrom(n, normalize(token)));
-        int termSize = termNgrams.size();
+        List<String> tokenNgrams = new ArrayList<>(ngram(power, normalize(token)));
+        int termSize = tokenNgrams.size();
         Map<String, Float> matched = new HashMap<>();
 
         source.forEach(s -> {
             String normalized = normalize(s);
-            List<String> currentNgrams = new ArrayList<>(ngramFrom(n, normalized));
+            List<String> currentNgrams = new ArrayList<>(ngram(power, normalized));
 
             List<String> result = currentNgrams.stream()
-                    .filter((new ArrayList<>(termNgrams)::contains))
+                    .filter((new ArrayList<>(tokenNgrams)::contains))
                     .collect(Collectors.toList());
 
             float matchPercentage = getMatchPercentage(termSize, result.size());
@@ -55,13 +57,13 @@ public class NgramSearch {
     }
 
     /**
-     * Method to create ngrams from input string
+     * Method to create n-grams from input string
      *
      * @param n   power of n-gram
      * @param str input string
      * @return list of ngrams
      */
-    public static List<String> ngramFrom(int n, String str) {
+    public static List<String> ngram(int n, String str) {
         List<String> ngrams = new ArrayList<>();
         for (int i = 0; i < str.length() - n + 1; i++)
             ngrams.add(str.substring(i, i + n));

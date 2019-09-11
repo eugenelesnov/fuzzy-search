@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
- * Fuzzy Search utility methods
+ * Common utility methods
  *
  * @author Eugene Lesnov
  */
@@ -24,18 +24,18 @@ class Util {
     }
 
     /**
-     * Method to calculate match percentage for Ngram search
+     * Method to calculate match percentage for n-gram search
      *
-     * @param termLength length of term String
+     * @param tokenLength length of query string
      * @param resultSize size of result Collection
      * @return percentage of march
      */
-    static float getMatchPercentage(int termLength, int resultSize) {
-        return Math.round(((float) resultSize / (float) termLength) * 100);
+    static float getMatchPercentage(int tokenLength, int resultSize) {
+        return Math.round(((float) resultSize / (float) tokenLength) * 100);
     }
 
     /**
-     * Method to ordering map by descending value
+     * Method to ordering map by descending {@link Float} value
      *
      * @param unorderedMap input map
      * @return ordered map by descending value
@@ -49,6 +49,21 @@ class Util {
                         (x, y) -> {
                             throw new IllegalStateException("Unexpected merge");
                         }, LinkedHashMap::new));
+    }
+
+    /**
+     * Method to ordering map by ascending {@link Integer} value
+     *
+     * @param unorderedMap input map
+     * @return ordered map by ascending value
+     */
+    static Map<String, Integer> orderByAscValue(Map<String, Integer> unorderedMap) {
+        LinkedHashMap<String, Integer> sortedMap = new LinkedHashMap<>();
+        unorderedMap.entrySet()
+                .stream()
+                .sorted(Map.Entry.comparingByValue())
+                .forEachOrdered(x -> sortedMap.put(x.getKey(), x.getValue()));
+        return sortedMap;
     }
 
 }

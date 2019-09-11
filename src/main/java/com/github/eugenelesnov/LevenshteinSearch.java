@@ -2,14 +2,54 @@ package com.github.eugenelesnov;
 
 import lombok.NonNull;
 
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+
 import static com.github.eugenelesnov.Util.normalize;
+import static com.github.eugenelesnov.Util.orderByAscValue;
 
 /**
  * Implementation of calculating Levenshtein distance
  *
  * @author Eugene Lesnov
  */
-public class LevenshteinDistance {
+public class LevenshteinSearch {
+
+    /**
+     * Method to search token in {@link Collection <String>}
+     *
+     * @param precision precision
+     * @param token     search token
+     * @param source    collection for searching
+     * @return map with a token as a key and precision (Levenshtein distance) as a value
+     */
+    public static Map<String, Integer> levenshteinSearch(int precision,
+                                                         @NonNull String token,
+                                                         @NonNull Collection<String> source) {
+
+        if (token.isEmpty()) {
+            throw new IllegalStateException("Search token must not be empty");
+        }
+
+        if (source.isEmpty()) {
+            throw new IllegalStateException("Source collection must not be empty");
+        }
+
+        if (precision <= 0) {
+            throw new IllegalStateException("The precision must be > 0");
+        }
+
+        Map<String, Integer> matched = new HashMap<>();
+
+        source.forEach(s -> {
+            int distance = levenshtein(s, token);
+            if (distance < precision) {
+                matched.put(s, distance);
+            }
+        });
+        return orderByAscValue(matched);
+    }
 
     /**
      * Method to calculate Levenshtein distance between two strings
