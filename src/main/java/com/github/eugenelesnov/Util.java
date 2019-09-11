@@ -28,7 +28,7 @@ class Util {
      *
      * @param tokenLength length of query string
      * @param resultSize size of result Collection
-     * @return percentage of march
+     * @return percentage of match
      */
     static float getMatchPercentage(int tokenLength, int resultSize) {
         return Math.round(((float) resultSize / (float) tokenLength) * 100);

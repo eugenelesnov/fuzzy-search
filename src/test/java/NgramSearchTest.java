@@ -38,7 +38,7 @@ class NgramSearchTest {
         }
 
         @Test
-        void shouldThrowIllegalStateExceptionWhenIncorrectN() {
+        void shouldThrowIllegalStateExceptionWhenIncorrectPower() {
             // given
             int n = -3;
             String token = "term";
@@ -50,7 +50,7 @@ class NgramSearchTest {
         }
 
         @Test
-        void shouldPrintResultCollection() {
+        void shouldPrintResultMap() {
             // given
             int power = 3;
             String token = "eugene";

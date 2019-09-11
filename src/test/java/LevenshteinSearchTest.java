@@ -39,7 +39,7 @@ class LevenshteinSearchTest {
         }
 
         @Test
-        void shouldPrintResultCollection() {
+        void shouldPrintResultMap() {
             // given
             int precision = 4;
             String token = "eugene";
