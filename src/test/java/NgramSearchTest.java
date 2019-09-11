@@ -3,7 +3,6 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 import java.util.Map;
 
 import static com.github.eugenelesnov.NgramSearch.ngramSearch;
@@ -17,63 +16,50 @@ class NgramSearchTest {
         @Test
         void shouldThrowIllegalStateExceptionWhenEmptySearchTerm() {
             // given
-            int n = 3;
-            String term = "";
-            Collection<String> source = getStringCollection();
+            int power = 3;
+            String token = "";
+            Collection<String> source = TestUtil.getStringCollection();
 
             // then
             assertThrows(IllegalStateException.class,
-                    () -> ngramSearch(n, term, source));
+                    () -> ngramSearch(power, token, source));
         }
 
         @Test
         void shouldThrowIllegalStateExceptionWhenEmptySourceCollection() {
             // given
-            int n = 3;
-            String term = "term";
+            int power = 3;
+            String token = "token";
             Collection<String> source = new ArrayList<>();
 
             // then
             assertThrows(IllegalStateException.class,
-                    () -> ngramSearch(n, term, source));
+                    () -> ngramSearch(power, token, source));
         }
 
         @Test
         void shouldThrowIllegalStateExceptionWhenIncorrectN() {
             // given
             int n = -3;
-            String term = "term";
-            Collection<String> source = getStringCollection();
+            String token = "term";
+            Collection<String> source = TestUtil.getStringCollection();
 
             // then
             assertThrows(IllegalStateException.class,
-                    () -> ngramSearch(n, term, source));
+                    () -> ngramSearch(n, token, source));
         }
 
         @Test
-        void shouldReturnResultCollection() {
+        void shouldPrintResultCollection() {
             // given
-            int n = 3;
-            String term = "eugene";
-            Collection<String> source = getStringCollection();
+            int power = 3;
+            String token = "eugene";
+            Collection<String> source = TestUtil.getStringCollection();
 
             // then
-            Map<String, Float> matched = ngramSearch(n, term, source);
-            matched.forEach((k, v) -> System.out.println("Token: " + k + "; Value: " + v));
+            Map<String, Float> matched = ngramSearch(power, token, source);
+            matched.forEach((k, v) -> System.out.println("Token: " + k + "; Percentage: " + v + "%"));
         }
     }
 
-    private Collection<String> getStringCollection() {
-        List<String> strings = new ArrayList<>();
-        strings.add("Eugene");
-        strings.add("Evgeny");
-        strings.add("Evgeniy");
-        strings.add("Evgeniya");
-        strings.add("Evgesha");
-        strings.add("Eureka");
-        strings.add("Evgenius");
-        strings.add("Julie");
-        strings.add("MeganDorian");
-        return strings;
-    }
 }

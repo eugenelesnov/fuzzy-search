@@ -1,13 +1,17 @@
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
-import static com.github.eugenelesnov.LevenshteinDistance.levenshtein;
+import java.util.Collection;
+import java.util.Map;
+
+import static com.github.eugenelesnov.LevenshteinSearch.levenshtein;
+import static com.github.eugenelesnov.LevenshteinSearch.levenshteinSearch;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class LevenshteinDistanceTest {
+class LevenshteinSearchTest {
 
     @Nested
-    class Levenshtein {
+    class LevenshteinSearch {
 
         @Test
         void shouldReturnZero() {
@@ -32,6 +36,18 @@ class LevenshteinDistanceTest {
             // then
             int actualDistance = levenshtein(str1, str2);
             assertEquals(expectedDistance, actualDistance);
+        }
+
+        @Test
+        void shouldPrintResultCollection() {
+            // given
+            int precision = 4;
+            String token = "eugene";
+            Collection<String> source = TestUtil.getStringCollection();
+
+            // then
+            Map<String, Integer> matched = levenshteinSearch(precision, token, source);
+            matched.forEach((k, v) -> System.out.println("Token: " + k + "; Levenshtein distance: " + v));
         }
     }
 }
