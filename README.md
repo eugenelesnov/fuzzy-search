@@ -45,4 +45,4 @@ Map<String, Integer> matched = levenshteinSearch(precision, token, source);
 matched.forEach((k, v) -> System.out.println("Token: " + k + "; Levenshtein distance: " + v));
 ```
 
-***NB! For now, version 0.4 is latest one. Bugs are very possible.***
+**NB! For now, version 0.4 is latest one. Bugs are very possible.**
