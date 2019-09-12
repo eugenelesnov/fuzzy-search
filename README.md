@@ -1,4 +1,5 @@
 [![](https://jitpack.io/v/EugeneLesnov/fuzzy-search.svg)](https://jitpack.io/#EugeneLesnov/fuzzy-search)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/815f744ded9b4ebcaeccde25ff0da4e2)](https://www.codacy.com/manual/zheka.lesnov1996/fuzzy-search?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=EugeneLesnov/fuzzy-search&amp;utm_campaign=Badge_Grade)
 
 # FuzzySearch
 Java implementation of some fuzzy search algorithms.
