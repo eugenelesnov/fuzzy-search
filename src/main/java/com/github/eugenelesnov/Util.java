@@ -15,12 +15,12 @@ class Util {
     /**
      * Method to normalize input string
      *
-     * @param input input string
+     * @param token input string
      * @return normalized string in lower case without
      * leading and trailing spaces
      */
-    static String normalize(String input) {
-        return input.toLowerCase().trim();
+    static String normalize(String token) {
+        return token.toLowerCase().trim();
     }
 
     /**
