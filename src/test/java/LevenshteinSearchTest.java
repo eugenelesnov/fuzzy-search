@@ -1,4 +1,8 @@
-import org.junit.jupiter.api.Nested;
+import net.jqwik.api.ForAll;
+import net.jqwik.api.Property;
+import net.jqwik.api.constraints.AlphaChars;
+import net.jqwik.api.constraints.IntRange;
+import net.jqwik.api.constraints.StringLength;
 import org.junit.jupiter.api.Test;
 
 import java.util.Collection;
@@ -10,44 +14,33 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class LevenshteinSearchTest {
 
-    @Nested
-    class LevenshteinSearch {
+    @Property
+    void distanceShouldNotDependOnTheOrder(@ForAll String string1, @ForAll String string2) {
+        assertEquals(levenshtein(string1, string2), levenshtein(string2, string1));
+    }
 
-        @Test
-        void shouldReturnZero() {
-            // given
-            String str1 = "test";
-            String str2 = "test";
+    @Property
+    void distanceBetweenSameStringsShouldEqualToZero(@ForAll String string) {
+        assertEquals(0, levenshtein(string, string));
+    }
 
-            // then
-            int distance = levenshtein(str1, str2);
-            assertEquals(0, distance);
-        }
+    @Property
+    void distanceBetweenOriginalAndCroppedStringShouldEqualToCropSize(@ForAll @StringLength(min = 10) @AlphaChars String string,
+                                                                      @ForAll @IntRange(max = 5) int startCropping,
+                                                                      @ForAll @IntRange(max = 5) int endCropping) {
+        String croppedString = string.substring(startCropping, string.length() - endCropping);
+        assertEquals(startCropping + endCropping, levenshtein(string, croppedString));
+    }
 
-        @Test
-        void shouldReturnLevenshteinDistance() {
-            // given
-            String str1 = "test";
-            String str2 = "testtest";
-            // expected distance is 4 because difference between
-            // str1 and str2 is 4 actions of character deletions
-            int expectedDistance = 4;
+    @Test
+    void shouldPrintResultMap() {
+        // given
+        int precision = 4;
+        String token = "eugene";
+        Collection<String> source = TestUtil.getStringCollection();
 
-            // then
-            int actualDistance = levenshtein(str1, str2);
-            assertEquals(expectedDistance, actualDistance);
-        }
-
-        @Test
-        void shouldPrintResultMap() {
-            // given
-            int precision = 4;
-            String token = "eugene";
-            Collection<String> source = TestUtil.getStringCollection();
-
-            // then
-            Map<String, Integer> matched = levenshteinSearch(precision, token, source);
-            matched.forEach((k, v) -> System.out.println("Token: " + k + "; Levenshtein distance: " + v));
-        }
+        // then
+        Map<String, Integer> matched = levenshteinSearch(precision, token, source);
+        matched.forEach((k, v) -> System.out.println("Token: " + k + "; Levenshtein distance: " + v));
     }
 }
