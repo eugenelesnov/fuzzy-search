@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.Map;
 
 import static com.github.eugenelesnov.NgramSearch.ngramSearch;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class NgramSearchTest {
@@ -21,8 +22,7 @@ class NgramSearchTest {
             Collection<String> source = TestUtil.getStringCollection();
 
             // then
-            assertThrows(IllegalStateException.class,
-                    () -> ngramSearch(power, token, source));
+            assertThrows(IllegalStateException.class, () -> ngramSearch(power, token, source));
         }
 
         @Test
@@ -45,8 +45,7 @@ class NgramSearchTest {
             Collection<String> source = TestUtil.getStringCollection();
 
             // then
-            assertThrows(IllegalStateException.class,
-                    () -> ngramSearch(n, token, source));
+            assertThrows(IllegalStateException.class, () -> ngramSearch(n, token, source));
         }
 
         @Test
@@ -59,6 +58,8 @@ class NgramSearchTest {
             // then
             Map<String, Float> matched = ngramSearch(power, token, source);
             matched.forEach((k, v) -> System.out.println("Token: " + k + "; Percentage: " + v + "%"));
+
+            assertNotNull(matched);
         }
     }
 
