@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 import static com.github.eugenelesnov.Util.*;
 
 /**
- * Ngram search implementation
+ * Ngram algorithm search implementation
  *
  * @author Eugene Lesnov
  */
@@ -39,19 +39,19 @@ public class NgramSearch {
         }
 
         List<String> tokenNgrams = new ArrayList<>(ngram(power, normalize(token)));
-        int termSize = tokenNgrams.size();
+        int tokenSize = tokenNgrams.size();
         Map<String, Float> matched = new HashMap<>();
 
-        source.forEach(s -> {
-            String normalized = normalize(s);
+        source.forEach(sourceToken -> {
+            String normalized = normalize(sourceToken);
             List<String> currentNgrams = new ArrayList<>(ngram(power, normalized));
 
             List<String> result = currentNgrams.stream()
                     .filter((new ArrayList<>(tokenNgrams)::contains))
                     .collect(Collectors.toList());
 
-            float matchPercentage = getMatchPercentage(termSize, result.size());
-            matched.put(s, matchPercentage);
+            float matchPercentage = getMatchPercentage(tokenSize, result.size());
+            matched.put(sourceToken, matchPercentage);
         });
         return orderByDescValue(matched);
     }
