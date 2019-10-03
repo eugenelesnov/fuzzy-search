@@ -1,3 +1,5 @@
+package unit;
+
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
@@ -57,9 +59,10 @@ class NgramSearchTest {
 
             // then
             Map<String, Float> matched = ngramSearch(power, token, source);
+            assertNotNull(matched);
+
             matched.forEach((k, v) -> System.out.println("Token: " + k + "; Percentage: " + v + "%"));
 
-            assertNotNull(matched);
         }
     }
 
