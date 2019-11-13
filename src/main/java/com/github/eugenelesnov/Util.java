@@ -27,7 +27,7 @@ class Util {
      * Method to calculate match percentage for n-gram search
      *
      * @param tokenLength length of query string
-     * @param resultSize size of result Collection
+     * @param resultSize  size of result Collection
      * @return percentage of match
      */
     static float getMatchPercentage(int tokenLength, int resultSize) {
@@ -40,7 +40,7 @@ class Util {
      * @param unorderedMap input map
      * @return ordered map by descending value
      */
-    static Map<String, Float> orderByDescValue(Map<String, Float> unorderedMap) {
+    static <T> Map<T, Float> orderByDescValue(Map<T, Float> unorderedMap) {
         return unorderedMap.entrySet().stream()
                 .sorted(Collections.reverseOrder(Map.Entry.comparingByValue()))
                 .collect(Collectors.toMap(
@@ -57,8 +57,8 @@ class Util {
      * @param unorderedMap input map
      * @return ordered map by ascending value
      */
-    static Map<String, Integer> orderByAscValue(Map<String, Integer> unorderedMap) {
-        LinkedHashMap<String, Integer> sortedMap = new LinkedHashMap<>();
+    static <T> Map<T, Integer> orderByAscValue(Map<T, Integer> unorderedMap) {
+        LinkedHashMap<T, Integer> sortedMap = new LinkedHashMap<>();
         unorderedMap.entrySet()
                 .stream()
                 .sorted(Map.Entry.comparingByValue())

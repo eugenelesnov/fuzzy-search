@@ -3,28 +3,30 @@ package com.github.eugenelesnov;
 import lombok.NonNull;
 
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import static com.github.eugenelesnov.Util.*;
 
 /**
- * Ngram algorithm search implementation
+ * Ngram search implementation
  *
  * @author Eugene Lesnov
  */
 public class NgramSearch {
 
     /**
-     * Method to search token in {@link Collection<String>}
+     * Method to search token in {@link Collection<T>}
      *
      * @param power  power of n-grams
      * @param token  search token
      * @param source collection for searching
-     * @return map with a token as a key and precision (percentage) as a value
+     * @param function functional interface describing the way to get string
+     * @return map with a {@link T} as a key and precision (Levenshtein distance) as a value
      */
-    public static Map<String, Float> ngramSearch(int power,
-                                                 @NonNull String token,
-                                                 @NonNull Collection<String> source) {
+    public static <T> Map<T, Float> ngramSearch(int power,
+                                                @NonNull String token,
+                                                @NonNull Collection<T> source, Function<T, String> function) {
 
         if (token.isEmpty()) {
             throw new IllegalStateException("Search token must not be empty");
@@ -40,9 +42,10 @@ public class NgramSearch {
 
         List<String> tokenNgrams = new ArrayList<>(ngram(power, normalize(token)));
         int tokenSize = tokenNgrams.size();
-        Map<String, Float> matched = new HashMap<>();
+        Map<T, Float> matched = new HashMap<>();
 
-        source.forEach(sourceToken -> {
+        source.forEach(t  -> {
+            String sourceToken = function.apply(t);
             String normalized = normalize(sourceToken);
             List<String> currentNgrams = new ArrayList<>(ngram(power, normalized));
 
@@ -51,7 +54,7 @@ public class NgramSearch {
                     .collect(Collectors.toList());
 
             float matchPercentage = getMatchPercentage(tokenSize, result.size());
-            matched.put(sourceToken, matchPercentage);
+            matched.put(t, matchPercentage);
         });
         return orderByDescValue(matched);
     }
@@ -63,7 +66,7 @@ public class NgramSearch {
      * @param str input string
      * @return list of ngrams
      */
-    public static List<String> ngram(int n, String str) {
+    private static List<String> ngram(int n, String str) {
         List<String> ngrams = new ArrayList<>();
         for (int i = 0; i < str.length() - n + 1; i++)
             ngrams.add(str.substring(i, i + n));

@@ -24,7 +24,7 @@ class NgramSearchTest {
             Collection<String> source = TestUtil.getStringCollection();
 
             // then
-            assertThrows(IllegalStateException.class, () -> ngramSearch(power, token, source));
+            assertThrows(IllegalStateException.class, () -> ngramSearch(power, token, source, String::toString));
         }
 
         @Test
@@ -36,7 +36,7 @@ class NgramSearchTest {
 
             // then
             assertThrows(IllegalStateException.class,
-                    () -> ngramSearch(power, token, source));
+                    () -> ngramSearch(power, token, source, String::toString));
         }
 
         @Test
@@ -47,7 +47,7 @@ class NgramSearchTest {
             Collection<String> source = TestUtil.getStringCollection();
 
             // then
-            assertThrows(IllegalStateException.class, () -> ngramSearch(n, token, source));
+            assertThrows(IllegalStateException.class, () -> ngramSearch(n, token, source, String::toString));
         }
 
         @Test
@@ -58,7 +58,7 @@ class NgramSearchTest {
             Collection<String> source = TestUtil.getStringCollection();
 
             // then
-            Map<String, Float> matched = ngramSearch(power, token, source);
+            Map<String, Float> matched = ngramSearch(power, token, source, String::toString);
             assertNotNull(matched);
 
             matched.forEach((k, v) -> System.out.println("Token: " + k + "; Percentage: " + v + "%"));
