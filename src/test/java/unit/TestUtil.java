@@ -14,6 +14,7 @@ class TestUtil {
     static Collection<String> getStringCollection() {
         List<String> strings = new ArrayList<>();
         strings.add("Eugene");
+        strings.add("Eugene");
         strings.add("Evgeny");
         strings.add("Evgeniy");
         strings.add("Evgeniya");
