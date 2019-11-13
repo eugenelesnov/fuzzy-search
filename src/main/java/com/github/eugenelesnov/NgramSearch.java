@@ -18,13 +18,14 @@ public class NgramSearch {
     /**
      * Method to search token in {@link Collection<T>}
      *
-     * @param power  power of n-grams
-     * @param token  search token
-     * @param source collection for searching
-     * @param function functional interface describing the way to get string
+     * @param power           power of n-grams
+     * @param matchPercentage desired percentage of match (value between 0 and 100)
+     * @param token           search token
+     * @param source          collection for searching
+     * @param function        functional interface describing the way to get string
      * @return map with a {@link T} as a key and precision (Levenshtein distance) as a value
      */
-    public static <T> Map<T, Float> ngramSearch(int power,
+    public static <T> Map<T, Float> ngramSearch(int power, float matchPercentage,
                                                 @NonNull String token,
                                                 @NonNull Collection<T> source, Function<T, String> function) {
 
@@ -44,7 +45,7 @@ public class NgramSearch {
         int tokenSize = tokenNgrams.size();
         Map<T, Float> matched = new HashMap<>();
 
-        source.forEach(t  -> {
+        source.forEach(t -> {
             String sourceToken = function.apply(t);
             String normalized = normalize(sourceToken);
             List<String> currentNgrams = new ArrayList<>(ngram(power, normalized));
@@ -53,8 +54,11 @@ public class NgramSearch {
                     .filter((new ArrayList<>(tokenNgrams)::contains))
                     .collect(Collectors.toList());
 
-            float matchPercentage = getMatchPercentage(tokenSize, result.size());
-            matched.put(t, matchPercentage);
+            float tokenMatchPercentage = getMatchPercentage(tokenSize, result.size());
+
+            if (tokenMatchPercentage >= matchPercentage) {
+                matched.put(t, tokenMatchPercentage);
+            }
         });
         return orderByDescValue(matched);
     }
