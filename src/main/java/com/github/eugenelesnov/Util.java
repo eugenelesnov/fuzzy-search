@@ -3,6 +3,7 @@ package com.github.eugenelesnov;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
@@ -27,7 +28,7 @@ class Util {
      * Method to calculate match percentage for n-gram search
      *
      * @param tokenLength length of query string
-     * @param resultSize size of result Collection
+     * @param resultSize  size of result Collection
      * @return percentage of match
      */
     static float getMatchPercentage(int tokenLength, int resultSize) {
@@ -40,7 +41,7 @@ class Util {
      * @param unorderedMap input map
      * @return ordered map by descending value
      */
-    static Map<String, Float> orderByDescValue(Map<String, Float> unorderedMap) {
+    static <T> Map<T, Float> orderByDescValue(Map<T, Float> unorderedMap) {
         return unorderedMap.entrySet().stream()
                 .sorted(Collections.reverseOrder(Map.Entry.comparingByValue()))
                 .collect(Collectors.toMap(
