@@ -5,28 +5,31 @@ import lombok.NonNull;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Function;
 
 import static com.github.eugenelesnov.Util.normalize;
 import static com.github.eugenelesnov.Util.orderByAscValue;
 
 /**
- * Implementation of calculating Levenshtein distance
+ * Implementation of Levenshtein distance calculating
  *
  * @author Eugene Lesnov
  */
 public class LevenshteinSearch {
 
     /**
-     * Method to search token in {@link Collection <String>}
+     * Method to search token in {@link Collection<T>}
      *
      * @param precision precision
      * @param token     search token
      * @param source    collection for searching
-     * @return map with a token as a key and precision (Levenshtein distance) as a value
+     * @param function functional interface describing the way to get string
+     * @return map with a {@link T} as a key and precision (Levenshtein distance) as a value
      */
-    public static Map<String, Integer> levenshteinSearch(int precision,
-                                                         @NonNull String token,
-                                                         @NonNull Collection<String> source) {
+    public static <T> Map<T, Integer> levenshteinSearch(int precision,
+                                                        @NonNull String token,
+                                                        @NonNull Collection<T> source,
+                                                        Function<T, String> function) {
 
         if (token.isEmpty()) {
             throw new IllegalStateException("Search token must not be empty");
@@ -40,11 +43,12 @@ public class LevenshteinSearch {
             throw new IllegalStateException("The precision must be > 0");
         }
 
-        Map<String, Integer> matched = new HashMap<>();
+        Map<T, Integer> matched = new HashMap<>();
 
         source.forEach(s -> {
-            int distance = levenshtein(s, token);
-            if (distance < precision) {
+            String appliedToken = function.apply(s);
+            int distance = levenshtein(appliedToken, token);
+            if (distance <= precision) {
                 matched.put(s, distance);
             }
         });

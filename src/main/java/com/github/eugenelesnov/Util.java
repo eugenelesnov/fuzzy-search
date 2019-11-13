@@ -3,7 +3,6 @@ package com.github.eugenelesnov;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
@@ -58,8 +57,8 @@ class Util {
      * @param unorderedMap input map
      * @return ordered map by ascending value
      */
-    static Map<String, Integer> orderByAscValue(Map<String, Integer> unorderedMap) {
-        LinkedHashMap<String, Integer> sortedMap = new LinkedHashMap<>();
+    static <T> Map<T, Integer> orderByAscValue(Map<T, Integer> unorderedMap) {
+        LinkedHashMap<T, Integer> sortedMap = new LinkedHashMap<>();
         unorderedMap.entrySet()
                 .stream()
                 .sorted(Map.Entry.comparingByValue())
