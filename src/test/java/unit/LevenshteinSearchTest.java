@@ -54,7 +54,7 @@ class LevenshteinSearchTest {
         Collection<String> source = TestUtil.getStringCollection();
 
         // then
-        Map<String, Integer> matched = levenshteinSearch(precision, token, source);
+        Map<String, Integer> matched = levenshteinSearch(precision, token, source, String::toString);
         assertNotNull(matched);
 
         matched.forEach((k, v) -> System.out.println("Token: " + k + "; Levenshtein distance: " + v));
