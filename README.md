@@ -20,7 +20,7 @@ allprojects {
 2. Add dependency:
 ```groovy
 dependencies {
-    implementation 'com.github.EugeneLesnov:fuzzy-search:0.4'
+    implementation 'com.github.EugeneLesnov:fuzzy-search:0.5'
 }
 ```
 
@@ -32,7 +32,7 @@ int power = 3;
 String token = "query";
 Collection<String> source = getSomeStringCollection();
 
-Map<String, Float> matched = ngramSearch(power, token, source);
+Map<String, Float> matched = ngramSearch(power, token, source, String::toString);
 matched.forEach((k, v) -> System.out.println("Token: " + k + "; Percentage: " + v));
 ```
 
@@ -42,6 +42,6 @@ int precision = 4;
 String token = "query";
 Collection<String> source = getStringCollection();
 
-Map<String, Integer> matched = levenshteinSearch(precision, token, source);
+Map<String, Integer> matched = levenshteinSearch(precision, token, source, String::toString);
 matched.forEach((k, v) -> System.out.println("Token: " + k + "; Levenshtein distance: " + v));
 ```
