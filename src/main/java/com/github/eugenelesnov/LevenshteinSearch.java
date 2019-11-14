@@ -3,6 +3,7 @@ package com.github.eugenelesnov;
 import lombok.NonNull;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
@@ -36,7 +37,7 @@ public class LevenshteinSearch {
         }
 
         if (source.isEmpty()) {
-            throw new IllegalStateException("Source collection must not be empty");
+            return Collections.emptyMap();
         }
 
         if (precision <= 0) {

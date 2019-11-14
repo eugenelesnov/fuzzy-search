@@ -34,7 +34,7 @@ public class NgramSearch {
         }
 
         if (source.isEmpty()) {
-            throw new IllegalStateException("Source collection must not be empty");
+            return Collections.emptyMap();
         }
 
         if (power <= 0) {

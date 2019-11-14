@@ -8,8 +8,7 @@ import java.util.Collection;
 import java.util.Map;
 
 import static com.github.eugenelesnov.NgramSearch.ngramSearch;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 class NgramSearchTest {
 
@@ -28,15 +27,15 @@ class NgramSearchTest {
         }
 
         @Test
-        void shouldThrowIllegalStateExceptionWhenEmptySourceCollection() {
+        void shouldReturnEmptyMapWhenEmptySourceCollection() {
             // given
             int power = 3;
             String token = "token";
             Collection<String> source = new ArrayList<>();
 
             // then
-            assertThrows(IllegalStateException.class,
-                    () -> ngramSearch(power, 20f, token, source, String::toString));
+            Map<String, Float> actualResult = ngramSearch(power, 20f, token, source, String::toString);
+            assertTrue(actualResult.isEmpty());
         }
 
         @Test
