@@ -21,8 +21,8 @@ class TestUtil {
         strings.add("Evgesha");
         strings.add("Eureka");
         strings.add("Evgenius");
-        strings.add("Julie");
-        strings.add("MeganDorian");
+        strings.add("Finrod Felagund");
+        strings.add("Glorfindel");
         return strings;
     }
 }
