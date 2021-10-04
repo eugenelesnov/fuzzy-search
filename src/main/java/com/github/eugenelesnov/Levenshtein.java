@@ -41,7 +41,7 @@ public class Levenshtein {
         }
 
         if (precision <= 0) {
-            throw new IllegalStateException("The precision must be > 0");
+            throw new IllegalStateException("The precision must be positive");
         }
 
         Map<T, Integer> matched = new HashMap<>();
