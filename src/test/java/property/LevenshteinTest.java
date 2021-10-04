@@ -6,10 +6,10 @@ import net.jqwik.api.constraints.AlphaChars;
 import net.jqwik.api.constraints.IntRange;
 import net.jqwik.api.constraints.StringLength;
 
-import static com.github.eugenelesnov.LevenshteinSearch.levenshtein;
+import static com.github.eugenelesnov.Levenshtein.levenshtein;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class LevenshteinSearchTest {
+class LevenshteinTest {
 
     @Property
     void distanceShouldNotDependOnTheOrder(@ForAll String string1, @ForAll String string2) {

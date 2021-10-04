@@ -13,7 +13,7 @@ import static com.github.eugenelesnov.Util.*;
  *
  * @author Eugene Lesnov
  */
-public class NgramSearch {
+public class Ngram {
 
     /**
      * Method to search token in {@link Collection<T>}
