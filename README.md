@@ -20,7 +20,7 @@ allprojects {
 2. Add dependency:
 ```groovy
 dependencies {
-    implementation 'com.github.EugeneLesnov:fuzzy-search:0.5'
+    implementation 'com.github.EugeneLesnov:fuzzy-search:{version}'
 }
 ```
 
