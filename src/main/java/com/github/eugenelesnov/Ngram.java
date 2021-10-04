@@ -5,6 +5,7 @@ import lombok.NonNull;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import static com.github.eugenelesnov.Util.*;
 
@@ -68,13 +69,12 @@ public class Ngram {
      *
      * @param n   power of n-gram
      * @param str input string
-     * @return list of ngrams
+     * @return List of ngrams
      */
     private static List<String> ngram(int n, String str) {
-        List<String> ngrams = new ArrayList<>();
-        for (int i = 0; i < str.length() - n + 1; i++)
-            ngrams.add(str.substring(i, i + n));
-        return ngrams;
+        return IntStream.range(0, str.length() - n + 1)
+                .mapToObj(i -> str.substring(i, i + n))
+                .collect(Collectors.toList());
     }
 
 }
