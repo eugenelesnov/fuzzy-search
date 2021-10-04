@@ -38,7 +38,7 @@ public class Ngram {
         }
 
         if (power <= 0) {
-            throw new IllegalStateException("The power of n-grams must be > 0");
+            throw new IllegalStateException("The power of n-grams must be positive");
         }
 
         List<String> tokenNgrams = new ArrayList<>(ngram(power, normalize(token)));
