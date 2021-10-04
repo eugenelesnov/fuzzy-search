@@ -7,13 +7,13 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
 
-import static com.github.eugenelesnov.NgramSearch.ngramSearch;
+import static com.github.eugenelesnov.Ngram.ngramSearch;
 import static org.junit.jupiter.api.Assertions.*;
 
-class NgramSearchTest {
+class NgramTest {
 
     @Nested
-    class NgramSearch {
+    class Ngram {
 
         @Test
         void shouldThrowIllegalStateExceptionWhenEmptySearchTerm() {

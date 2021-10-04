@@ -5,11 +5,11 @@ import org.junit.jupiter.api.Test;
 import java.util.Collection;
 import java.util.Map;
 
-import static com.github.eugenelesnov.LevenshteinSearch.levenshtein;
-import static com.github.eugenelesnov.LevenshteinSearch.levenshteinSearch;
+import static com.github.eugenelesnov.Levenshtein.levenshtein;
+import static com.github.eugenelesnov.Levenshtein.levenshteinSearch;
 import static org.junit.jupiter.api.Assertions.*;
 
-class LevenshteinSearchTest {
+class LevenshteinTest {
 
     @Test
     void shouldThrowNullPointerException() {

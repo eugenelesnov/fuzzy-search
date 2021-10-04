@@ -16,7 +16,7 @@ import static com.github.eugenelesnov.Util.orderByAscValue;
  *
  * @author Eugene Lesnov
  */
-public class LevenshteinSearch {
+public class Levenshtein {
 
     /**
      * Method to search token in {@link Collection<T>}
@@ -24,7 +24,7 @@ public class LevenshteinSearch {
      * @param precision precision
      * @param token     search token
      * @param source    collection for searching
-     * @param function functional interface describing the way to get string
+     * @param function  functional interface describing the way to get string
      * @return map with a {@link T} as a key and precision (Levenshtein distance) as a value
      */
     public static <T> Map<T, Integer> levenshteinSearch(int precision,
