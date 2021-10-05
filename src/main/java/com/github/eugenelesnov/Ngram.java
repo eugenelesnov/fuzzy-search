@@ -26,10 +26,8 @@ public class Ngram {
      * @param function        functional interface describing the way to get string
      * @return map with a {@link T} as a key and precision (Levenshtein distance) as a value
      */
-    public static <T> Map<T, Float> ngramSearch(int power, float matchPercentage,
-                                                @NonNull String token,
+    public static <T> Map<T, Float> ngramSearch(int power, float matchPercentage, @NonNull String token,
                                                 @NonNull Collection<T> source, Function<T, String> function) {
-
         if (token.isEmpty()) {
             throw new IllegalStateException("Search token must not be empty");
         }
