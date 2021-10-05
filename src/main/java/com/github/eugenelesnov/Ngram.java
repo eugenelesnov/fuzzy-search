@@ -69,7 +69,7 @@ public class Ngram {
      *
      * @param n   power of n-gram
      * @param str input string
-     * @return List of ngrams
+     * @return List of n-grams
      */
     private static List<String> ngram(int n, String str) {
         return IntStream.range(0, str.length() - n + 1)
