@@ -42,14 +42,14 @@ public class Ngram {
             throw new IllegalStateException("The power of n-grams must be positive");
         }
 
-        List<String> tokenNgrams = new ArrayList<>(ngram(power, normalize(token)));
+        List<String> tokenNgrams = ngram(power, normalize(token));
         int tokenSize = tokenNgrams.size();
         Map<T, Float> matched = new HashMap<>();
 
         source.forEach(t -> {
             String sourceToken = function.apply(t);
             String normalized = normalize(sourceToken);
-            List<String> currentNgrams = new ArrayList<>(ngram(power, normalized));
+            List<String> currentNgrams = ngram(power, normalized);
 
             List<String> result = currentNgrams.stream()
                     .filter((new ArrayList<>(tokenNgrams)::contains))
