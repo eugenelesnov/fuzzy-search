@@ -10,7 +10,7 @@ import java.util.stream.IntStream;
 import static com.github.eugenelesnov.Util.*;
 
 /**
- * Ngram search implementation
+ * N-gram search implementation
  *
  * @author Eugene Lesnov
  */
