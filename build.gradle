@@ -8,7 +8,7 @@ version '1.0-SNAPSHOT'
 sourceCompatibility = JavaVersion.VERSION_11
 
 wrapper {
-    gradleVersion = '7.0'
+    gradleVersion = '8.10.2'
 }
 
 repositories {
