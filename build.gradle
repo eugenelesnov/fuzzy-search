@@ -28,5 +28,5 @@ dependencies {
 
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
     testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
-    testImplementation "net.jqwik:jqwik:1.5.6"
+    testImplementation "net.jqwik:jqwik:1.9.1"
 }
